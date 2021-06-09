@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-logo {
@@ -42,6 +46,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  border: 1px solid black;
+  padding: 5px;
 }
 
 .userform > button {
@@ -50,4 +56,10 @@
 
 .userform > label {
   margin: 10px;
+}
+
+.userDisplay {
+  border: 1px solid black;
+  margin-top: 20px;
+  width: 80%;
 }
