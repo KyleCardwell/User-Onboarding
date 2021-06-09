@@ -8,6 +8,9 @@ import UserDisplay from './Components/UserDisplay';
 import axios from 'axios';
 import * as yup from 'yup';
 
+
+const API_URL = "https://reqres.in/api/users"
+
 const initialFormValues = {
   username: "",
   email: "",
@@ -15,13 +18,28 @@ const initialFormValues = {
   terms: false
 }
 
-const allUsers = []
 
 function App() {
 
 
-  const [users, setUsers] = useState(allUsers)
+  const [users, setUsers] = useState([])
   const [formValues, setFormValues] = useState(initialFormValues)
+
+
+  const postNewUser = newUser => {
+    axios
+      .post(API_URL, newUser)
+      .then(res => {
+        setUsers([...users, newUser])
+        console.log("is this working?", users)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+      .finally(() => {
+        setFormValues(initialFormValues)
+      })
+  }
 
 
   const inputChange = (name, value) => {
@@ -39,6 +57,8 @@ function App() {
       password: formValues.password,
       terms: formValues.terms
     }
+
+    postNewUser(newUser);
   }
 
 
@@ -50,7 +70,11 @@ function App() {
         values={formValues}
       />
       {/* <UserForm /> */}
-      <UserDisplay />
+      {users.map(user => {
+        return (
+          <UserDisplay key={user.username} values={user}/>
+        )
+      })}
     </div>
   );
 }

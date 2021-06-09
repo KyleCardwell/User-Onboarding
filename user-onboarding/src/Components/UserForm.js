@@ -59,7 +59,10 @@ function UserForm(props) {
                     />I acknowledge that I have read and agree to the Terms of Service
                 </label>
 
-                <button type="submit">Submit</button>
+                <button
+                    type="submit"
+                    onClick={onSubmit}
+                >Submit</button>
             </form>
         </div>
     );
