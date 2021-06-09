@@ -9,7 +9,7 @@ import axios from 'axios';
 import * as yup from 'yup';
 
 const initialFormValues = {
-  name: "",
+  username: "",
   email: "",
   password: "",
   terms: false
@@ -19,24 +19,28 @@ const allUsers = []
 
 function App() {
 
-const [users, setUsers] = useState(allUsers)
-const [formValues, setFormValues] = useState(initialFormValues)
 
-const inputChange = (name, value) => {
+  const [users, setUsers] = useState(allUsers)
+  const [formValues, setFormValues] = useState(initialFormValues)
 
-  setFormValues({
-    ...formValues, [name]: value
-  })
-}
 
-const formSubmit = () => {
-  const newUser = {
-    name: formValues.name,
-    email: formValues.email,
-    password: formValues.password,
-    terms: formValues.terms
+  const inputChange = (name, value) => {
+
+    setFormValues({
+      ...formValues, [name]: value
+    })
   }
-}
+
+
+  const formSubmit = () => {
+    const newUser = {
+      username: formValues.username,
+      email: formValues.email,
+      password: formValues.password,
+      terms: formValues.terms
+    }
+  }
+
 
   return (
     <div className="App">
