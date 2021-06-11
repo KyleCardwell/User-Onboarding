@@ -17,15 +17,12 @@ describe("User Form App", () => {
 
     it('filling out inputs', () => {
 
+        submitButton().should('not.be.enabled')
         nameInput().type(testName).should('have.value', testName)
         emailInput().type(testEmail)
         passwordInput().type(testPassword)
         termsInput().check()
-        submitButton().should('exist')
-
-    })
-
-    it('check the terms checkbox', () => {
+        submitButton().should('be.enabled')
 
     })
 
