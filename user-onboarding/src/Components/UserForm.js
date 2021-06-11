@@ -29,6 +29,7 @@ function UserForm(props) {
                         name="username"
                         value={values.username}
                         onChange={onChange}
+                        id="inputName"
                     />
                 </label>
 
@@ -38,6 +39,7 @@ function UserForm(props) {
                         name="email"
                         value={values.email}
                         onChange={onChange}
+                        id="inputEmail"
                     />
                 </label>
 
@@ -47,6 +49,7 @@ function UserForm(props) {
                         name="password"
                         value={values.password}
                         onChange={onChange}
+                        id="inputPassword"
                     />
                 </label>
 
@@ -63,6 +66,7 @@ function UserForm(props) {
                     type="submit"
                     onClick={onSubmit}
                     disabled={disabled}
+                    id="submitBtn"
                 >Submit</button>
 
                 <div className="errors">
