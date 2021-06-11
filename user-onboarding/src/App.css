@@ -63,3 +63,8 @@
   margin-top: 20px;
   width: 80%;
 }
+
+.errors{
+  color: red;
+  font-style: italic;
+}

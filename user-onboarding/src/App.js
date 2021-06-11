@@ -7,6 +7,7 @@ import UserDisplay from './Components/UserDisplay';
 
 import axios from 'axios';
 import * as yup from 'yup';
+import schema from './Validation/formSchema'
 
 
 const API_URL = "https://reqres.in/api/users"
@@ -18,13 +19,23 @@ const initialFormValues = {
   terms: false
 }
 
+const initialFormErrors = {
+  username: "",
+  email: "",
+  password: "",
+  terms: false
+}
+
+const initialDisabled = []
+
 
 function App() {
 
 
   const [users, setUsers] = useState([])
   const [formValues, setFormValues] = useState(initialFormValues)
-
+  const [formErrors, setFormErrors] = useState(initialFormErrors)
+  const [disabled, setDisabled] = useState(initialDisabled)
 
   const postNewUser = newUser => {
     axios
@@ -44,6 +55,15 @@ function App() {
 
   const inputChange = (name, value) => {
 
+    yup.reach(schema, name)
+      .validate(value)
+      .then(() => {
+        setFormErrors({...formErrors, [name]: ""})
+      })
+      .catch(err => {
+        setFormErrors({...formErrors, [name]: err.message})
+      })
+
     setFormValues({
       ...formValues, [name]: value
     })
@@ -61,6 +81,14 @@ function App() {
     postNewUser(newUser);
   }
 
+  useEffect(() => {
+    schema.isValid(formValues)
+      .then(valid => {
+        console.log(valid)
+        setDisabled(!valid)
+      })
+  }, [formValues])
+
 
   return (
     <div className="App">
@@ -68,6 +96,8 @@ function App() {
         change={inputChange}
         submit={formSubmit}
         values={formValues}
+        errors={formErrors}
+        disabled={disabled}
       />
       {/* <UserForm /> */}
       {users.map(user => {

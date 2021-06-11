@@ -12,8 +12,10 @@ const schema = yup.object().shape({
     password: yup
         .string()
         .required("a password is required")
-        .min(8, "must be at least 8 characters long"),
-    terms: yup.boolean(),
+        .min(8, "password must be at least 8 characters long"),
+    terms: yup
+        .boolean()
+        .oneOf([true], "please accept the Terms of Service"),
 })
 
 export default schema;

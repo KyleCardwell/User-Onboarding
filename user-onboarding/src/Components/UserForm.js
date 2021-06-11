@@ -3,7 +3,7 @@ import '../App.css'
 
 function UserForm(props) {
 
-    const { change, submit, values } = props
+    const { change, submit, values, errors, disabled } = props
 
     const onSubmit = evt => {
         evt.preventDefault()
@@ -62,7 +62,15 @@ function UserForm(props) {
                 <button
                     type="submit"
                     onClick={onSubmit}
+                    disabled={disabled}
                 >Submit</button>
+
+                <div className="errors">
+                    <div>{errors.username}</div>
+                    <div>{errors.email}</div>
+                    <div>{errors.password}</div>
+                    <div>{errors.terms}</div>
+                </div>
             </form>
         </div>
     );
